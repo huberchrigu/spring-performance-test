@@ -9,3 +9,19 @@ services:
     image: mongo
     ports:
       - "9101:27017"
+  mongo2:
+    image: mongo
+    ports:
+      - "9102:27017"
+  mongo3:
+    image: mongo
+    ports:
+      - "9103:27017"
+  mongo4:
+    image: mongo
+    ports:
+      - "9104:27017"
+  mongo5:
+    image: mongo
+    ports:
+      - "9105:27017"

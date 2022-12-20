@@ -1,0 +1,7 @@
+server:
+  port: 9004
+spring:
+  data:
+    mongodb:
+      port: 9104
+
