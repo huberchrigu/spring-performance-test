@@ -1,0 +1,11 @@
+version: '3.1'
+
+services:
+  mongo0:
+    image: mongo
+    ports:
+      - "9100:27017"
+  mongo1:
+    image: mongo
+    ports:
+      - "9101:27017"

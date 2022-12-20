@@ -1,0 +1,6 @@
+server:
+  port: 9001
+spring:
+  data:
+    mongodb:
+      port: 9101
