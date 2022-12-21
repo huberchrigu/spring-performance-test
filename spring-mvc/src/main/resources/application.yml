@@ -4,4 +4,5 @@ spring:
   data:
     mongodb:
       port: 9100
-
+backend:
+  url: "http://localhost:9001"

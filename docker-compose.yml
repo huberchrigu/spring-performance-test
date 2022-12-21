@@ -1,27 +1,87 @@
 version: '3.1'
 
 services:
-  mongo0:
+  spring-mvc:
+    image: docker.io/library/spring-mvc:0.0.1-SNAPSHOT
+    ports:
+      - "9000:9000"
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongo-mvc
+      SPRING_DATA_MONGODB_PORT: 27017
+      BACKEND_URL: "http://spring-mvc-backend:9001"
+    depends_on:
+      - mongo-mvc
+      - spring-mvc-backend
+  mongo-mvc:
     image: mongo
     ports:
       - "9100:27017"
-  mongo1:
+  spring-mvc-backend:
+    image: docker.io/library/spring-mvc-backend:0.0.1-SNAPSHOT
+    ports:
+      - "9001:9001"
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongo-mvc-backend
+      SPRING_DATA_MONGODB_PORT: 27017
+    depends_on:
+      - mongo-mvc-backend
+  mongo-mvc-backend:
     image: mongo
     ports:
       - "9101:27017"
-  mongo2:
+  spring-webflux-reactor:
+    image: docker.io/library/spring-webflux-reactor:0.0.1-SNAPSHOT
+    ports:
+      - "9002:9002"
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongo-webflux-reactor
+      SPRING_DATA_MONGODB_PORT: 27017
+      BACKEND_URL: "http://spring-webflux-reactor-backend:9003"
+    depends_on:
+      - mongo-webflux-reactor
+      - spring-webflux-reactor-backend
+  mongo-webflux-reactor:
     image: mongo
     ports:
       - "9102:27017"
-  mongo3:
+  spring-webflux-reactor-backend:
+    image: docker.io/library/spring-webflux-reactor-backend:0.0.1-SNAPSHOT
+    ports:
+      - "9003:9003"
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongo-webflux-reactor-backend
+      SPRING_DATA_MONGODB_PORT: 27017
+    depends_on:
+      - mongo-webflux-reactor-backend
+  mongo-webflux-reactor-backend:
     image: mongo
     ports:
       - "9103:27017"
-  mongo4:
+  spring-webflux-coroutines:
+    image: docker.io/library/spring-webflux-coroutines:0.0.1-SNAPSHOT
+    ports:
+      - "9004:9004"
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongo-webflux-coroutines
+      SPRING_DATA_MONGODB_PORT: 27017
+      BACKEND_URL: "http://spring-webflux-coroutines-backend:9005"
+    depends_on:
+      - mongo-webflux-coroutines
+      - spring-webflux-coroutines-backend
+  mongo-webflux-coroutines:
     image: mongo
     ports:
       - "9104:27017"
-  mongo5:
+  spring-webflux-coroutines-backend:
+    image: docker.io/library/spring-webflux-coroutines-backend:0.0.1-SNAPSHOT
+    ports:
+      - "9005:9005"
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongo-webflux-coroutines-backend
+      SPRING_DATA_MONGODB_PORT: 27017
+    depends_on:
+      - mongo-webflux-coroutines-backend
+  mongo-webflux-coroutines-backend:
     image: mongo
     ports:
       - "9105:27017"
