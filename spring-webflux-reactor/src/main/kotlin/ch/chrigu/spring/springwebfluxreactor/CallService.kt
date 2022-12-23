@@ -12,20 +12,20 @@ import kotlin.collections.List
 
 @Service
 class CallService(private val callRepository: CallRepository, private val numberRepository: NumberRepository) {
-    fun addCall(): Mono<CallWithNumbers> {
+    fun addCall(delay: Int): Mono<CallWithNumbers> {
         return callRepository.save(Call())
             .flatMap { call ->
-                (0 until 10).toFlux()
-                    .flatMap { numberRepository.createNumber(call.id) }
+                (0 until 5).toFlux()
+                    .concatMap { numberRepository.createNumber(call.id, delay) }
                     .collectList()
                     .map { CallWithNumbers(call, it) }
             }
     }
 
-    fun getCall(id: UUID): Mono<CallWithNumbers> {
+    fun getCall(id: UUID, delay: Int): Mono<CallWithNumbers> {
         return callRepository.findById(id)
             .flatMap { call ->
-                numberRepository.findById(call.id)
+                numberRepository.findById(call.id, delay)
                     .collectList()
                     .map { CallWithNumbers(call, it) }
             }

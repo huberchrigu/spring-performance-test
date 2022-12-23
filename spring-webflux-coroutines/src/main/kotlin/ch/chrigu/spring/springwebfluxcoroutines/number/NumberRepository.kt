@@ -4,6 +4,6 @@ import kotlinx.coroutines.flow.Flow
 import java.util.*
 
 interface NumberRepository {
-    suspend fun createNumber(callId: UUID): GeneratedNumber
-    fun findById(callId: UUID): Flow<GeneratedNumber>
+    suspend fun createNumber(callId: UUID, delay: Int): GeneratedNumber
+    fun findById(callId: UUID, delay: Int): Flow<GeneratedNumber>
 }

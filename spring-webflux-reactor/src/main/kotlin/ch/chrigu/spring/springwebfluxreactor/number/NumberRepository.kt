@@ -6,6 +6,6 @@ import reactor.core.publisher.Mono
 import java.util.*
 
 interface NumberRepository {
-    fun createNumber(callId: UUID): Mono<GeneratedNumber>
-    fun findById(callId: UUID): Flux<GeneratedNumber>
+    fun createNumber(callId: UUID, delay: Int): Mono<GeneratedNumber>
+    fun findById(callId: UUID, delay: Int): Flux<GeneratedNumber>
 }

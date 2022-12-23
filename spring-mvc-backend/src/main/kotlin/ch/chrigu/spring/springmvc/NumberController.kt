@@ -9,12 +9,14 @@ import java.util.*
 @RequestMapping("/numbers")
 class NumberController(private val numberService: NumberService) {
     @GetMapping
-    fun findByCallId(@RequestParam callId: UUID): List<GeneratedNumber> {
+    fun findByCallId(@RequestParam callId: UUID, @RequestParam delay: Long): List<GeneratedNumber> {
+        Thread.sleep(delay * 1000)
         return numberService.findByCallId(callId)
     }
 
     @PostMapping
-    fun createNumber(@RequestBody body: CreateNumberBody): ResponseEntity<GeneratedNumber> {
+    fun createNumber(@RequestBody body: CreateNumberBody, @RequestParam delay: Long): ResponseEntity<GeneratedNumber> {
+        Thread.sleep(delay * 1000)
         val generatedNumber = numberService.createNumber(body.callId)
         return ResponseEntity.created(URI("/numbers/${generatedNumber.id}")).body(generatedNumber)
     }
